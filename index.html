@@ -1,16 +1,40 @@
 <!DOCTYPE html>
+
 <head>
-    <h1>CGOL Terminal</h1>
     <link rel="stylesheet" href="style.css">
-    <title>Conway's</title>
+    <h1 class="title">CGOL Terminal</h1>
+    <title>CGOL Terminal</title>
     <script src="main.js" defer></script>
 </head>
+
 <body>
-    <div class="grid-container">
-        <canvas id="Canvas" width="500" height="500" style="margin:auto"></canvas>
-        <div class="console">
-            <div class="console-history"></div>
-            <input class="console-input" type="text" autofocus spellcheck="false">
+    <div class="parent">
+        <div class="child"><canvas id="canvas" width="500" height="500"></canvas></div>
+        <div class="child">
+            <div class="console">
+                <div class="console-history"></div>
+                <input class="console-input" type="text" autofocus spellcheck="false">
+            </div>
+        </div>
+    </div>
+
+    <div id="help_modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Quickstart guide</h2>
+            <h3>Commands:</h3>
+            <ul>
+                <li><span style="color: #ffe75d;">create w,h: </span>creates a new grid of width (w) and height (h)</li>
+                <li><span style="color: #ffe75d;">clear: </span>clears current grid</li>
+                <li><span style="color: #ffe75d;">run: </span>begins running CGOL simulation</li>
+                <li><span style="color: #ffe75d;">stop: </span>stops currently running simulation</li>
+                <li><span style="color: #ffe75d;">help: </span>opens the panel you're seeing right now</li>
+            </ul>
+            <h3>Errors: </h3>
+            <ul>
+                <li><span style="color: #ff3d3d;">command not found: </span>pretty self explanatory</li>
+                <li><span style="color: #ff3d3d;">check command name / params: </span>you probably didn't format your command correctly</li>
+            </ul>
         </div>
     </div>
 </body>

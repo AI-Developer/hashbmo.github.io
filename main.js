@@ -1,9 +1,19 @@
 // Canvas Config
-const canvas = document.getElementById("Canvas");
+const canvas = document.getElementById("canvas")
 var ctx = canvas.getContext("2d");
 var c_width = canvas.width;
 var c_height = canvas.height;
 var canvas_hovered = false, canvas_focused = false;
+
+// Modal Config {Sourced from w3schools tutorial}
+const help_modal = document.getElementById("help_modal")
+const help_btn = document.getElementById("help_btn")
+const span = document.getElementsByClassName("close")[0]
+
+// Exit Modal Button Config
+span.onclick = () => {
+    help_modal.style.display = "none"
+}
 
 // Console Config / Declarations
 const doc_console = document.querySelector(".console")
@@ -37,13 +47,6 @@ function create_grid(width = 4, height = 4, fill = 0) {
     return grid
 }
 
-// Clears a grid by replacing all slots with an optional fill value (default is 0)
-function clear_grid(grid, fill=0) {
-    for (let y = 0; y < grid.length; y++) {
-        for (let x = 0; x < grid.length; x++) {grid[y][x]=fill}
-    }
-}
-
 // Randomises a given grid according to noise density
 function randomise(grid, density) {
     for (let y = 0; y < grid.length; y++) {
@@ -66,8 +69,8 @@ function visualise(grid) {
         for (let x = 0; x < grid[y].length; x++) {
             let val = grid[y][x]
             switch(val == 1) {
-                case true: ctx.fillStyle = '#F3F37B'; break;
-                case false: ctx.fillStyle = '#212121'; break;
+                case true: ctx.fillStyle = '#FFFFFF'; break;
+                case false: ctx.fillStyle = '#151515'; break;
             }
             ctx.strokeStyle = 'FFFFFF'
             ctx.fillRect(x*w, y*h, w, h)
@@ -136,9 +139,9 @@ canvas.addEventListener("mousedown",(ev)=>{get_cpos(canvas, ev)})
 
 // Commands
 const binds = {
-    "d" : ()=>{grid = conway_step(grid)},
+    "s" : ()=>{grid = conway_step(grid)},
     "a" : NaN,//step_back,
-    "w" : clear_grid,
+    "c" : ()=>{grid = create_grid(grid[0].length, grid.length)},
 }
 
 // Listens for key down events and executes the corresponding function if appropriate
@@ -195,14 +198,21 @@ const commands = {
         ['func'] : () => {
             var str = ""
             for (cmd of command_list) {str+=cmd+" "}
-            return str
+            return str.trim()
+        }
+    },
+    ['help'] : {
+        ['params'] : 0,
+        ['func'] : () => {
+            help_modal.style.display = "block"
+            return 'opened help panel'
         }
     }
 }
 
 // Command Handler
 function handle_command(parsed) {
-    var [command, ...args] = parsed, error = 'error: check command name / params'
+    var [command, ...args] = parsed, error = 'check command name / params'
     if (!commands[command]) {return 'command not found'}
     const func = commands[command].func, params = commands[command].params
     if (!(args.length >= params)) {return error}
@@ -212,7 +222,7 @@ function handle_command(parsed) {
 // Connects keyup event in textbox
 cons_input.addEventListener("keydown", (ev) => {
     if (ev.key.toLowerCase() == "enter" && cons_input.value.length > 0) {
-        const out = document.createElement("div"), inp = document.createElement("div")
+        var out = document.createElement("div"), inp = document.createElement("div")
         inp.setAttribute("class", "console-input-log")
         out.setAttribute("class", "console-output-log")
         inp.textContent = "> " + cons_input.value.trim()
@@ -220,7 +230,6 @@ cons_input.addEventListener("keydown", (ev) => {
         let parsed = cons_input.value.trim().split(' ')
         out.innerHTML = handle_command(parsed); visualise(grid)
         cons_input.value = ""
-        history.scrollTop = history.scrollTopMax
 
         if (logs.length >= 8) {
             var last = logs[0]
@@ -232,6 +241,9 @@ cons_input.addEventListener("keydown", (ev) => {
         history.append(inp, out)
     }
 })
+
+// Modal Handler
+
 
 // Initial Setup
 var grid = create_grid(20,20)
