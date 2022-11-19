@@ -2,9 +2,12 @@
 
 <head>
     <link rel="stylesheet" href="style.css">
-    <h1 class="title">CGOL Terminal</h1>
     <title>CGOL Terminal</title>
     <script src="main.js" defer></script>
+
+    <div class="header">
+        <h1>CGOL Terminal</h1>
+    </div>
 </head>
 
 <body>
@@ -24,16 +27,26 @@
             <h2>Quickstart guide</h2>
             <h3>Commands:</h3>
             <ul>
-                <li><span style="color: #ffe75d;">create w,h: </span>creates a new grid of width (w) and height (h)</li>
-                <li><span style="color: #ffe75d;">clear: </span>clears current grid</li>
-                <li><span style="color: #ffe75d;">run: </span>begins running CGOL simulation</li>
-                <li><span style="color: #ffe75d;">stop: </span>stops currently running simulation</li>
-                <li><span style="color: #ffe75d;">help: </span>opens the panel you're seeing right now</li>
+                <li><span class="command">create w,h: </span>creates a new grid of width (w) and height (h)</li>
+                <li><span class="command">clear: </span>clears current grid</li>
+                <li><span class="command">run: </span>begins running CGOL simulation</li>
+                <li><span class="command">stop: </span>stops currently running simulation</li>
+                <li><span class="command">help: </span>opens the panel you're seeing right now</li>
+            </ul>
+            <h3>Keybinds</h3>
+            <ul>
+                <li><span class="key">[s]: </span>perform one step of the simulation</li>
+                <li><span class="key">[c]: </span>clears current grid</li>
             </ul>
             <h3>Errors: </h3>
             <ul>
-                <li><span style="color: #ff3d3d;">command not found: </span>pretty self explanatory</li>
-                <li><span style="color: #ff3d3d;">check command name / params: </span>you probably didn't format your command correctly</li>
+                <li><span class="error">command not found: </span>pretty self explanatory</li>
+                <li><span class="error">check command name / params: </span>you probably didn't format your command correctly</li>
+            </ul>
+            <h3>Grid sizes </h3>
+            <ul>
+                <li>You can make uneven grid sizes however they dont look great so it's not recommended.</li>
+                <li>Making a grid that's too big can crash the website so do with that what you will ¯\_(ツ)_/¯</li>
             </ul>
         </div>
     </div>

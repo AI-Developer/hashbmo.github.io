@@ -5,15 +5,13 @@ var c_width = canvas.width;
 var c_height = canvas.height;
 var canvas_hovered = false, canvas_focused = false;
 
-// Modal Config {Sourced from w3schools tutorial}
+// Modal Config
 const help_modal = document.getElementById("help_modal")
 const help_btn = document.getElementById("help_btn")
 const span = document.getElementsByClassName("close")[0]
 
 // Exit Modal Button Config
-span.onclick = () => {
-    help_modal.style.display = "none"
-}
+span.onclick = () => {help_modal.style.display = "none"}
 
 // Console Config / Declarations
 const doc_console = document.querySelector(".console")
@@ -69,10 +67,9 @@ function visualise(grid) {
         for (let x = 0; x < grid[y].length; x++) {
             let val = grid[y][x]
             switch(val == 1) {
-                case true: ctx.fillStyle = '#FFFFFF'; break;
+                case true: ctx.fillStyle = '#ffe75d'; break;
                 case false: ctx.fillStyle = '#151515'; break;
             }
-            ctx.strokeStyle = 'FFFFFF'
             ctx.fillRect(x*w, y*h, w, h)
         }
     }
@@ -81,7 +78,7 @@ function visualise(grid) {
 // Gets neighbours of a cell at a given [x,y] location in grid
 function getn(grid, pos) {
     let adj = [[0,1],[1,0],[-1,0],[0,-1],[1,1],[1,-1],[-1,-1],[-1,1]]
-    let neighbours = [], sizes = [grid.length, grid[0].length]
+    let neighbours = [], sizes = [grid[0].length,grid.length]
     for (add of adj) {
         let npos = [...pos] // n(eighbour)pos
         let valid = true
@@ -103,7 +100,6 @@ function getn(grid, pos) {
 function conway_step(grid) {
     let h = grid.length, w = grid[0].length
     const next = create_grid(w,h)
-    console.log(w,h)
     for (let y = 0; y < h; y++) {
         for (let x = 0; x < w; x++) {
             let neighbours = getn(grid, [x,y]), val = 0
@@ -210,13 +206,23 @@ const commands = {
     }
 }
 
+// Output Type Color Scheme
+const output_colors = {
+    ["error"]: "#ff3d3d",
+    ["log"]: "#acff28",
+}
+
 // Command Handler
 function handle_command(parsed) {
-    var [command, ...args] = parsed, error = 'check command name / params'
-    if (!commands[command]) {return 'command not found'}
+    var [command, ...args] = parsed, out = "check command names / params", type = "error"
+    if (!commands[command]) {out = 'command not found'; return [out,type]}
     const func = commands[command].func, params = commands[command].params
-    if (!(args.length >= params)) {return error}
-    return func(args) || error
+    if (!(args.length >= params)) {return [out,type]}
+    var result = func(args)
+    type = result && "log" || "error"
+    out = result || out
+    return [out,type]
+
 }
 
 // Connects keyup event in textbox
@@ -228,7 +234,10 @@ cons_input.addEventListener("keydown", (ev) => {
         inp.textContent = "> " + cons_input.value.trim()
 
         let parsed = cons_input.value.trim().split(' ')
-        out.innerHTML = handle_command(parsed); visualise(grid)
+        let [output_text, type] = handle_command(parsed)
+        console.log(type)
+        out.textContent = output_text; visualise(grid)
+        out.style.color = output_colors[type]
         cons_input.value = ""
 
         if (logs.length >= 8) {
@@ -242,9 +251,10 @@ cons_input.addEventListener("keydown", (ev) => {
     }
 })
 
-// Modal Handler
-
-
 // Initial Setup
 var grid = create_grid(20,20)
 visualise(grid)
+help_log = document.createElement("div")
+help_log.textContent = "enter 'help' into input box for quickstart guide"
+help_log.setAttribute("class", "console-output-log")
+history.append(help_log)

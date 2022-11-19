@@ -2,19 +2,17 @@
     font-family: monospace;
 }
 
+/* General CSS */
 body {
     background-color: #111111;
-}
-
-.title {
-    text-align: center;
-    color: white;
+    margin: 0;
 }
 
 canvas {
     border: 1px solid #ffffff;
 }
 
+/* Used to position canvas and console */
 .parent {
     margin: 1rem;
     padding: 2rem 2rem;
@@ -24,6 +22,16 @@ canvas {
     display: inline-block;
     padding: 1rem 1rem;
     vertical-align: middle;
+}
+
+/* Header element */
+.header {
+    padding: 5px;
+    margin: auto;
+    text-align: center;
+    background: #000000;
+    color: white;
+    font-size: 10px;
 }
   
 /* Console CSS */
@@ -59,12 +67,12 @@ canvas {
 
 .console-input-log {
     text-align: left;
-    color : #ffffff;
+    color: #ffffff;
 }
 
 .console-output-log {
+    color:#acff28;
     text-align: left;
-    color : #acff28;
 }
 
 .console-input {
@@ -79,10 +87,10 @@ canvas {
 }
 .console-input:hover,
 .console-input:focus {
-    background: rgba(255,255,255,0.07);
+    background: rgba(255, 255, 255, 0.07);
 }
 
-/* Modal CSS * Sourced from w3schools tutorial [ no shame B) ]*/ 
+/* Modal CSS ~ Shamelessly sourced from w3schools B) */ 
  .modal {
      display: none;
      position: fixed;
@@ -99,14 +107,14 @@ canvas {
 
  .modal-content {
      background-color: #000000;
-     margin: 15% auto;
+     margin: 10% auto;
      padding: 20px;
      border: 1px solid #ffffff;
      width: 40%;
  }
 
  .close {
-     color: #aaa;
+     color: rgb(133, 133, 133);
      float: right;
      font-size: 28px;
      font-weight: bold;
@@ -114,7 +122,18 @@ canvas {
 
  .close:hover,
  .close:focus {
-     color: black;
+     color: rgb(248, 248, 248);
      text-decoration: none;
      cursor: pointer;
+ }
+
+ /* Span Elements */
+ span.command {
+    color: #ffe75d;
+ }
+ span.error {
+    color: #ff3d3d;
+ }
+ span.key {
+    color: #3dff8e;
  }
