@@ -1,0 +1,77 @@
+@font-face {
+    font-family: robomono;
+    src: url(robotomono.ttf);
+}
+
+* {
+    font-family: monospace;
+    background: #111111;
+}
+
+.body {
+    margin: 0;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 10px;
+    border: 10px #ffffffff;
+}
+
+.console {
+    display: flex;
+    flex-direction: column;
+    background: #000000;
+    height: 500px;
+    width: 500px;
+}
+
+.console-history {
+    flex-grow: 1;
+    box-sizing: border-box;
+    padding: 10px;
+    overflow-y: auto;
+    background: #000000;
+}
+
+.console-input-log,
+.console-output-log {
+    box-sizing: border-box;
+    padding: 6px 12px;
+    font-weight: bold;
+    background: #000000;
+}
+
+.console-input-log:hover,
+.console-output-log:hover {
+    background: rgba(255,255,255, 0.03);
+}
+
+.console-input-log {
+    color : #ffffff;
+}
+
+.console-output-log {
+    color : #63ccec;
+}
+
+.console-input {
+    flex-shrink: 0;
+    box-sizing: border-box;
+    padding: 12px;
+    border: none;
+    outline: none;
+    color: white;
+    background: rgba(255,255,255,0.05);
+    transition: 0.2s;
+}
+
+.console-input:hover,
+.console-input:focus {
+    background: rgba(255,255,255,0.07);
+}
