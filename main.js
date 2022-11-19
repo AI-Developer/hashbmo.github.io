@@ -257,4 +257,4 @@ visualise(grid)
 help_log = document.createElement("div")
 help_log.textContent = "enter 'help' into input box for quickstart guide"
 help_log.setAttribute("class", "console-output-log")
-history.append(help_log)
+history.append([help_log])
