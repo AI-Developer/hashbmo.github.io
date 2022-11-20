@@ -170,7 +170,7 @@ const commands = {
         ['params'] : 0,
         ['func'] : () => {
             commands.stop.func()
-            clear_grid(grid)
+            grid = create_grid(grid[0].length, grid.length)
             return 'cleared grid'
         }},
     ['run'] : {
